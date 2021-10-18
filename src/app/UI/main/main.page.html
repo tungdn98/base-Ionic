@@ -1,0 +1,73 @@
+<app-header
+  name="Customer"
+>
+</app-header>
+
+<ion-content>
+
+  <form #form="ngForm" (ngSubmit)="submitCustomer(form)">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+          </div>
+          <div padding>
+
+            <!--            <ion-item>-->
+            <!--              <ion-input [(ngModel)]="customer.id" name="id" type="text" placeholder="id" readonly></ion-input>-->
+            <!--            </ion-item>-->
+
+            <ion-item>
+              <ion-input [(ngModel)]="customer.name" name="name" type="text" placeholder="your name" ngModel
+                         required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input [(ngModel)]="customer.address" name="address" type="text" placeholder="address" ngModel
+                         required></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+
+          </div>
+
+          <ion-row>
+            <ion-col>
+              <ion-button size="medium" type="submit" [disabled]="form.invalid" expand="block">Add</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button size="medium" (click)="updateCustomer(form)" [disabled]="form.invalid" expand="block">update
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button color="danger" size="medium" type="button" (click)="deleteCustomer(customer)"
+                          [disabled]="form.invalid" expand="block">Delete
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <p>
+    Danh sách person
+  </p>
+
+  <ion-list>
+    <ion-item (click)="handleClickItem(item)" *ngFor="let item of items">
+      <strong>
+        {{item.name}}
+      </strong>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="50px" (ionInfinite)="loadData($event)" [disabled]="number == totalPages">
+    <ion-infinite-scroll-content
+      loadingSpinner="dots"
+      loadingText="đang tải dữ liệu ...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
